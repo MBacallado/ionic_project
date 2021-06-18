@@ -1,17 +1,28 @@
-<ion-header [translucent]="true">
+<ion-content>
   <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+    <img src="../../assets/img/085_logo-gocheka.png" height="40px" width="100px" style="margin: 0 auto; display: block;">
   </ion-toolbar>
-</ion-header>
+  <ion-list>
+    <ion-item style="font-size: 12px">
+      <ion-label style="font-size: 12px">Select</ion-label>
+      <ion-select okText="okay" cancelText="cancel" [(ngModel)]="searchCategoria">
+        <ion-select-option value="Medicina">Medicina</ion-select-option>
+        <ion-select-option value="Marketing Digital">Marketing Digital</ion-select-option>
+        <ion-select-option value="Educación">Educación</ion-select-option>
+        <ion-select-option value="Diseñador web">Diseñador web</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-card *ngFor="let afi of affiliates | filter:searchCategoria">
+    <img src="../../assets/products/{{ afi.url }}.jpg" alt="">
+    <ion-card-content>
+      <ion-card-title>{{ afi.lugar }}</ion-card-title>
+      <ion-card-subtitle>{{ afi.categoria }}</ion-card-subtitle>
+    </ion-card-content>
+    <ion-button expand="full" color="tertiary" [routerLink]="['/details', afi.cod]">
+      <ion-icon slot="end" name="arrow-forward"></ion-icon>
+    </ion-button>
+  </ion-card>
 </ion-content>
+

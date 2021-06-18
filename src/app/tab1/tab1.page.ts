@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AffiliateService } from '../services/affiliate.service';
 
 @Component({
   selector: 'app-tab1',
@@ -7,6 +8,16 @@ import { Component } from '@angular/core';
 })
 export class Tab1Page {
 
-  constructor() {}
+  affiliates: any[] = [];
+  searchCategoria = '';
 
+  constructor(private as: AffiliateService) {
+    this.loadAffiliates();
+  }
+
+  loadAffiliates() {
+    this.as.loadAffiliates().subscribe( (resp: any[]) => {
+      this.affiliates = resp;
+    })
+  }
 }
